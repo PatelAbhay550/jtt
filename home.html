@@ -1,0 +1,90 @@
+<!-- HTML for the chatbot interface -->
+<div id="chatbot">
+    <div id="chatbot-conversation">
+      <!-- Conversation messages will go here -->
+    </div>
+    <form id="chatbot-form">
+      <input type="text" id="chatbot-input" placeholder="Ask the chatbot...">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  
+  <style>
+    /* CSS for styling the chatbot interface */
+    #chatbot {
+      width: 300px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    #chatbot-conversation {
+      height: 200px;
+      overflow-y: scroll;
+    }
+  
+    #chatbot-form {
+      display: flex;
+    }
+  
+    #chatbot-input {
+      flex-grow: 1;
+      padding: 5px;
+    }
+  
+    #chatbot-form button {
+      padding: 5px;
+    }
+  </style>
+  
+  <script>
+    // JavaScript for handling user input and chatbot responses
+  
+    // Get references to the chatbot elements
+    const chatbot = document.getElementById('chatbot');
+    const conversation = document.getElementById('chatbot-conversation');
+    const form = document.getElementById('chatbot-form');
+    const input = document.getElementById('chatbot-input');
+  
+    // Add an event listener to the form submit button
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent the form from reloading the page
+  
+      // Get the user's message
+      const message = input.value;
+  
+      // Clear the input field
+      input.value = '';
+  
+      // Send the message to the chatbot and get a response
+      const response = getResponseFromChatbot(message);
+  
+      // Display the response in the chatbot conversation
+      conversation.innerHTML += `
+        <div class="chatbot-message">
+          <p>${response}</p>
+        </div>
+      `;
+  
+      // Scroll the conversation to the bottom
+      conversation.scrollTop = conversation.scrollHeight;
+    });
+  
+    function getResponseFromChatbot(message) {
+    // Use natural language processing techniques to generate a response based on the user's message
+    // You can use a library like Natural or Brain.js for this purpose
+    // For this example, we'll just return a simple response based on the message
+    if (message.includes('price')) {
+      return 'Our prices vary depending on the type of garment and the complexity of the design. Please contact us for a quote.';
+    } else if (message.includes('turnaround time')) {
+      return 'Our turnaround time is typically 2-3 weeks for most garments. However, this can vary depending on the complexity of the design and our current workload.';
+    } else if (message.includes('order')) {
+      return 'To place an order, add the items you would like to purchase to your cart and proceed to checkout. From there, you can enter your shipping and payment information to complete your order.';
+    } else if (message.includes('payment')) {
+      return 'We accept payment by credit card or Paytm. Payment is due at the time of ordering.';
+    } else {
+      return 'Thank you for your message! We will get back to you as soon as possible.';
+    }
+}
+  </script>
+  
